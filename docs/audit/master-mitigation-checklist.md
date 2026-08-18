@@ -38,16 +38,16 @@
 
 ### Canonical repository output
 
-- [ ] Define what a "complete assessment package" means for this repository.
-- [ ] Create a single canonical output structure under `docs/example/` or equivalent.
-- [ ] Expand the example so it uses every core template, not only the assessment narrative and one ADR.
-- [ ] Ensure the example includes intake, inventory, risks, quality scenarios, roadmap, decision log, and debt map.
-- [ ] Add a clear table of contents or index for the example package.
+- [x] Define what a "complete assessment package" means for this repository.
+- [x] Create a single canonical output structure under `docs/example/` or equivalent.
+- [x] Expand the example so it uses every core template, not only the assessment narrative and one ADR.
+- [x] Ensure the example includes intake, inventory, risks, quality scenarios, roadmap, decision log, and debt map.
+- [x] Add a clear table of contents or index for the example package.
 
 ### Acceptance criteria
 
-- [ ] A new contributor can inspect one example and understand the full expected output set.
-- [ ] Every core template has one completed example instance.
+- [x] A new contributor can inspect one example and understand the full expected output set.
+- [x] Every core template has one completed example instance.
 
 ## Phase 3: Memory
 
@@ -119,3 +119,4 @@
 | 0 | 2026-08-18 | The repository is useful but incomplete as a repeatable assessment system | Created audit and mitigation checklist | Audit saved in `docs/audit/` | Baseline established | Start with detection hardening |
 | 1 | 2026-08-18 | A portable validator with structural checks will improve trust in the kit without adding process debt | Added `validate.ps1`, strengthened validation rules, documented Windows usage, and fixed markdown encoding drift in core files | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 | Completed | Decide whether to keep `validate.sh` as a thin wrapper or converge on a single cross-platform validator |
 | 2 | 2026-08-18 | Sectioned validation output and lightweight semantic checks will make the validator more useful without turning it into a heavy governance tool | Refactored `validate.ps1` to report checks by section, added semantic linkage checks between the example assessment and ADR, and cleaned remaining audit-doc encoding drift | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 20 checks across 5 sections | Completed | Decide whether to extend semantic checks to future example artifacts |
+| 3 | 2026-08-18 | Completing the example package before expanding validation will reduce overfitting and make later traceability checks anchor to real artifacts | Added the missing example documents for intake, inventory, risk register, quality scenarios, roadmap, decision log, technical debt map, and a package index; linked them from the executive assessment | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and `docs/example/` now contains one completed instance of each core template | Completed | Move to Phase 3 and add a formal traceability matrix plus evidence register |
