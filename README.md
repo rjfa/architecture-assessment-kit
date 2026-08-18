@@ -13,7 +13,7 @@ Production-oriented templates and a completed example for architecture assessmen
 
 1. Copy `templates/` into an assessment workspace.
 2. Complete intake and system inventory.
-3. Score risks using `impact × likelihood × detectability`.
+3. Score risks using `impact x likelihood x detectability`.
 4. Define measurable quality-attribute scenarios.
 5. Record decisions as ADRs and sequence the roadmap.
 
@@ -33,6 +33,15 @@ CONTRIBUTING.md      Quality and contribution rules
 ```bash
 ./validate.sh
 ```
+
+```powershell
+pwsh ./validate.ps1
+```
+
+`validate.sh` is the unified entry point on Unix-like environments and forwards to `pwsh`.
+Use `pwsh ./validate.ps1` on Windows or anywhere you want to invoke the validator directly.
+
+The validator reports checks by section instead of returning a single generic success line. Current sections cover structure, required document markers, content hygiene, references, and lightweight semantic traceability between the example assessment and its ADR.
 
 No client code, names, schemas, or proprietary rules are included.
 

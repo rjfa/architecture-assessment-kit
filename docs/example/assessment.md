@@ -1,4 +1,4 @@
-# OrderFlow assessment — fictional example
+# OrderFlow assessment - fictional example
 
 ## Executive finding
 
@@ -35,17 +35,17 @@ flowchart TD
   Extract --> Optimize["Optimize: capacity + cost"]
 ```
 
-### 0–30 days — Stabilize
+### 0-30 days - Stabilize
 - Add correlation IDs and structured state-transition logs.
 - Characterize the ten highest-value order paths.
 - Measure carrier latency, duplicates, and transaction duration.
 
-### 31–60 days — Isolate
+### 31-60 days - Isolate
 - Place carrier calls behind a port.
 - Add transactional outbox and idempotent consumer.
 - Introduce feature-flagged routing.
 
-### 61–90 days — Extract
+### 61-90 days - Extract
 - Extract fulfillment behind the existing contract.
 - Shadow traffic, compare outcomes, then migrate cohorts.
 - Retain reversible routing until SLOs hold for two release cycles.

@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
-test -f README.md
-test -f templates/03-risk-register.md
-test -f docs/example/assessment.md
-test -f docs/example/adr/ADR-001-incremental-modernization.md
-if rg -n "TODO|TBD" docs/example; then
-  echo "Unresolved placeholder in completed example" >&2
+
+if ! command -v pwsh >/dev/null 2>&1; then
+  echo "pwsh is required to run validation. Install PowerShell 7+ and retry." >&2
   exit 1
 fi
-echo "Architecture Assessment Kit: validation passed"
+
+pwsh -NoLogo -NoProfile -File "$(dirname "$0")/validate.ps1"
