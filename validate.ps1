@@ -161,7 +161,17 @@ $requiredFiles = @(
   "templates/06-modernization-roadmap.md",
   "templates/07-decision-log.md",
   "templates/08-technical-debt-map.md",
+  "templates/09-traceability-matrix.md",
+  "templates/10-evidence-register.md",
+  "templates/11-glossary-and-conventions.md",
+  "docs/example/README.md",
   "docs/example/assessment.md",
+  "docs/example/06-modernization-roadmap.md",
+  "docs/example/07-decision-log.md",
+  "docs/example/08-technical-debt-map.md",
+  "docs/example/09-traceability-matrix.md",
+  "docs/example/10-evidence-register.md",
+  "docs/example/11-glossary-and-conventions.md",
   "docs/example/adr/ADR-001-incremental-modernization.md"
 )
 
@@ -206,16 +216,74 @@ $requiredContent = @{
   "templates/06-modernization-roadmap.md" = @(
     "# Incremental modernization roadmap",
     "## Sequencing rules",
-    "| Stabilize |",
-    "| Isolate |",
-    "| Extract |",
-    "| Optimize |"
+    "| RM-01 | Stabilize |",
+    "| RM-02 | Isolate |",
+    "| RM-03 | Extract |",
+    "| RM-04 | Optimize |"
   )
   "templates/07-decision-log.md" = @(
-    "# Decision log"
+    "# Decision log",
+    "Decision ID"
   )
   "templates/08-technical-debt-map.md" = @(
-    "# Technical debt map"
+    "# Technical debt map",
+    "Debt ID"
+  )
+  "templates/09-traceability-matrix.md" = @(
+    "# Traceability matrix",
+    "## Usage notes"
+  )
+  "templates/10-evidence-register.md" = @(
+    "# Evidence register",
+    "## Confidence guide",
+    "## Follow-up rule"
+  )
+  "templates/11-glossary-and-conventions.md" = @(
+    "# Glossary and identifier conventions",
+    "## Identifier conventions",
+    "## Traceability rules",
+    "## Unknown handling",
+    "## Glossary"
+  )
+  "docs/example/README.md" = @(
+    "# OrderFlow example package",
+    "## Complete package definition",
+    "## Package index",
+    "## Reading order"
+  )
+  "docs/example/06-modernization-roadmap.md" = @(
+    "# Incremental modernization roadmap",
+    "RM-01",
+    "RM-02",
+    "RM-03",
+    "RM-04"
+  )
+  "docs/example/07-decision-log.md" = @(
+    "# Decision log",
+    "DEC-001"
+  )
+  "docs/example/08-technical-debt-map.md" = @(
+    "# Technical debt map",
+    "TD-001",
+    "TD-004"
+  )
+  "docs/example/09-traceability-matrix.md" = @(
+    "# Traceability matrix",
+    "BD-001",
+    "ADR-001",
+    "DEC-001"
+  )
+  "docs/example/10-evidence-register.md" = @(
+    "# Evidence register",
+    "E-001",
+    "E-006"
+  )
+  "docs/example/11-glossary-and-conventions.md" = @(
+    "# Glossary and identifier conventions",
+    "BD-",
+    "E-",
+    "RM-",
+    "TD-"
   )
   "docs/example/assessment.md" = @(
     "# OrderFlow assessment",
@@ -263,12 +331,20 @@ foreach ($suspiciousCharacter in $suspiciousCharacters) {
 Add-CheckResult -Section "Content hygiene" -Check "Encoding drift" -Details "No suspicious mojibake characters found in README, templates, example, ADR, or audit docs"
 
 Assert-RelativeMarkdownLinksExist -Path "README.md"
+Assert-RelativeMarkdownLinksExist -Path "docs/example/README.md"
 Assert-RelativeMarkdownLinksExist -Path "docs/example/assessment.md"
 Assert-RelativeMarkdownLinksExist -Path "docs/audit/master-mitigation-checklist.md"
-Add-CheckResult -Section "References" -Check "Relative links" -Details "Verified markdown relative links in README, example assessment, and audit checklist"
+Add-CheckResult -Section "References" -Check "Relative links" -Details "Verified markdown relative links in README, example package docs, and audit checklist"
 
 $assessmentContent = Get-FileContent -Path "docs/example/assessment.md"
 $adrContent = Get-FileContent -Path "docs/example/adr/ADR-001-incremental-modernization.md"
+$exampleReadmeContent = Get-FileContent -Path "docs/example/README.md"
+$traceabilityContent = Get-FileContent -Path "docs/example/09-traceability-matrix.md"
+$evidenceContent = Get-FileContent -Path "docs/example/10-evidence-register.md"
+$glossaryContent = Get-FileContent -Path "docs/example/11-glossary-and-conventions.md"
+$roadmapContent = Get-FileContent -Path "docs/example/06-modernization-roadmap.md"
+$decisionLogContent = Get-FileContent -Path "docs/example/07-decision-log.md"
+$debtMapContent = Get-FileContent -Path "docs/example/08-technical-debt-map.md"
 
 $assessmentRiskMatches = Get-Matches -Content $assessmentContent -Pattern '(?m)^\| (R\d+) \|'
 $assessmentRiskIds = @($assessmentRiskMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
@@ -316,5 +392,121 @@ foreach ($horizon in $roadmapHorizons) {
     -FailureMessage "The example assessment is missing the roadmap horizon: $horizon"
 }
 Add-CheckResult -Section "Semantic traceability" -Check "Roadmap horizons" -Details ("The example assessment includes roadmap horizons: {0}" -f ($roadmapHorizons -join ", "))
+
+$traceabilityDriverMatches = Get-Matches -Content $traceabilityContent -Pattern '(?m)^\| (BD-\d{3}) \|'
+$traceabilityDriverIds = @($traceabilityDriverMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
+if ($traceabilityDriverIds.Count -eq 0) {
+  throw "No business driver IDs were found in docs/example/09-traceability-matrix.md"
+}
+Add-CheckResult -Section "Memory traceability" -Check "Business drivers" -Details ("Found driver IDs in traceability matrix: {0}" -f ($traceabilityDriverIds -join ", "))
+
+$evidenceMatches = Get-Matches -Content $evidenceContent -Pattern '(?m)^\| (E-\d{3}) \|'
+$evidenceIds = @($evidenceMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
+if ($evidenceIds.Count -eq 0) {
+  throw "No evidence IDs were found in docs/example/10-evidence-register.md"
+}
+Add-CheckResult -Section "Memory traceability" -Check "Evidence register IDs" -Details ("Found evidence IDs: {0}" -f ($evidenceIds -join ", "))
+
+$roadmapMatches = Get-Matches -Content $roadmapContent -Pattern '(?m)^\| (RM-\d{2}) \|'
+$roadmapIds = @($roadmapMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
+if ($roadmapIds.Count -eq 0) {
+  throw "No roadmap IDs were found in docs/example/06-modernization-roadmap.md"
+}
+Add-CheckResult -Section "Memory traceability" -Check "Roadmap IDs" -Details ("Found roadmap IDs: {0}" -f ($roadmapIds -join ", "))
+
+$decisionMatches = Get-Matches -Content $decisionLogContent -Pattern '(?m)^\| (DEC-\d{3}) \|'
+$decisionIds = @($decisionMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
+if ($decisionIds.Count -eq 0) {
+  throw "No decision IDs were found in docs/example/07-decision-log.md"
+}
+Add-CheckResult -Section "Memory traceability" -Check "Decision IDs" -Details ("Found decision IDs: {0}" -f ($decisionIds -join ", "))
+
+$debtMatches = Get-Matches -Content $debtMapContent -Pattern '(?m)^\| (TD-\d{3}) \|'
+$debtIds = @($debtMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
+if ($debtIds.Count -eq 0) {
+  throw "No debt IDs were found in docs/example/08-technical-debt-map.md"
+}
+Add-CheckResult -Section "Memory traceability" -Check "Debt IDs" -Details ("Found debt IDs: {0}" -f ($debtIds -join ", "))
+
+Assert-Matches `
+  -Content $exampleReadmeContent `
+  -Pattern '09-traceability-matrix\.md' `
+  -FailureMessage "The example package README does not include the traceability matrix."
+Assert-Matches `
+  -Content $exampleReadmeContent `
+  -Pattern '10-evidence-register\.md' `
+  -FailureMessage "The example package README does not include the evidence register."
+Assert-Matches `
+  -Content $exampleReadmeContent `
+  -Pattern '11-glossary-and-conventions\.md' `
+  -FailureMessage "The example package README does not include the glossary and conventions document."
+Add-CheckResult -Section "Memory traceability" -Check "Package index coverage" -Details "The example package README indexes the traceability matrix, evidence register, and glossary"
+
+foreach ($driverId in $traceabilityDriverIds) {
+  if ($evidenceContent -notmatch [regex]::Escape($driverId)) {
+    throw "Driver $driverId is present in the traceability matrix but missing from the evidence register."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Driver to evidence coverage" -Details "Every business driver in the traceability matrix appears in the evidence register"
+
+foreach ($referencedEvidenceId in @(Get-Matches -Content $traceabilityContent -Pattern 'E-\d{3}' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($evidenceIds -notcontains $referencedEvidenceId) {
+    throw "Evidence ID $referencedEvidenceId is referenced in the traceability matrix but missing from the evidence register."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Traceability evidence linkage" -Details "Every evidence ID referenced in the traceability matrix exists in the evidence register"
+
+foreach ($referencedRoadmapId in @(Get-Matches -Content $traceabilityContent -Pattern 'RM-\d{2}' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($roadmapIds -notcontains $referencedRoadmapId) {
+    throw "Roadmap ID $referencedRoadmapId is referenced in the traceability matrix but missing from the roadmap."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Traceability roadmap linkage" -Details "Every roadmap ID referenced in the traceability matrix exists in the roadmap"
+
+foreach ($referencedDecisionId in @(Get-Matches -Content $traceabilityContent -Pattern 'DEC-\d{3}' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($decisionIds -notcontains $referencedDecisionId) {
+    throw "Decision ID $referencedDecisionId is referenced in the traceability matrix but missing from the decision log."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Traceability decision linkage" -Details "Every decision ID referenced in the traceability matrix exists in the decision log"
+
+foreach ($referencedDebtId in @(Get-Matches -Content $traceabilityContent -Pattern 'TD-\d{3}' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($debtIds -notcontains $referencedDebtId) {
+    throw "Debt ID $referencedDebtId is referenced in the traceability matrix but missing from the debt map."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Traceability debt linkage" -Details "Every debt ID referenced in the traceability matrix exists in the debt map"
+
+foreach ($referencedDriverId in @(Get-Matches -Content $evidenceContent -Pattern 'BD-\d{3}' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($traceabilityDriverIds -notcontains $referencedDriverId) {
+    throw "Driver ID $referencedDriverId is referenced in the evidence register but missing from the traceability matrix."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Evidence driver linkage" -Details "Every driver ID referenced in the evidence register exists in the traceability matrix"
+
+foreach ($referencedRiskId in @(Get-Matches -Content $evidenceContent -Pattern 'R\d+' | ForEach-Object { $_.Value } | Sort-Object -Unique)) {
+  if ($assessmentRiskIds -notcontains $referencedRiskId) {
+    throw "Risk ID $referencedRiskId is referenced in the evidence register but missing from the example assessment."
+  }
+}
+Add-CheckResult -Section "Memory traceability" -Check "Evidence risk linkage" -Details "Every risk ID referenced in the evidence register exists in the example assessment"
+
+Assert-Matches `
+  -Content $glossaryContent `
+  -Pattern 'BD-' `
+  -FailureMessage "The glossary does not define the BD- identifier convention."
+Assert-Matches `
+  -Content $glossaryContent `
+  -Pattern 'E-' `
+  -FailureMessage "The glossary does not define the E- identifier convention."
+Assert-Matches `
+  -Content $glossaryContent `
+  -Pattern 'RM-' `
+  -FailureMessage "The glossary does not define the RM- identifier convention."
+Assert-Matches `
+  -Content $glossaryContent `
+  -Pattern 'TD-' `
+  -FailureMessage "The glossary does not define the TD- identifier convention."
+Add-CheckResult -Section "Memory traceability" -Check "Glossary conventions" -Details "The glossary defines the core identifier prefixes used by the example package"
 
 Write-ValidationReport

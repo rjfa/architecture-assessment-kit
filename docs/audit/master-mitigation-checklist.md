@@ -27,6 +27,7 @@
 - [x] Decide whether validation should live in PowerShell, a portable script, or both.
 - [x] Report validation output by named section instead of returning a single generic success line.
 - [x] Add lightweight semantic traceability checks between the example assessment and ADR.
+- [x] Extend validation to cover traceability matrix, evidence register, glossary conventions, and cross-artifact ID linkage.
 
 ### Acceptance criteria
 
@@ -53,16 +54,16 @@
 
 ### Traceability and evidence
 
-- [ ] Add a `traceability-matrix` template linking business drivers, evidence, risks, scenarios, ADRs, roadmap items, and debt items.
-- [ ] Add an `evidence-register` template with source, timestamp, owner, confidence, and open follow-up fields.
-- [ ] Add repository conventions for identifiers such as risk IDs, ADR IDs, scenario IDs, and roadmap item IDs.
-- [ ] Add a glossary for scoring, reversibility, criticality, and assessment terms.
-- [ ] Define how unknowns graduate into either evidence, accepted assumptions, or explicit risks.
+- [x] Add a `traceability-matrix` template linking business drivers, evidence, risks, scenarios, ADRs, roadmap items, and debt items.
+- [x] Add an `evidence-register` template with source, timestamp, owner, confidence, and open follow-up fields.
+- [x] Add repository conventions for identifiers such as risk IDs, ADR IDs, scenario IDs, and roadmap item IDs.
+- [x] Add a glossary for scoring, reversibility, criticality, and assessment terms.
+- [x] Define how unknowns graduate into either evidence, accepted assumptions, or explicit risks.
 
 ### Acceptance criteria
 
-- [ ] A reviewer can trace any recommendation back to evidence and business intent.
-- [ ] Identifiers are consistent across all templates and examples.
+- [x] A reviewer can trace any recommendation back to evidence and business intent.
+- [x] Identifiers are consistent across all templates and examples.
 
 ## Phase 4: Trigger
 
@@ -120,3 +121,5 @@
 | 1 | 2026-08-18 | A portable validator with structural checks will improve trust in the kit without adding process debt | Added `validate.ps1`, strengthened validation rules, documented Windows usage, and fixed markdown encoding drift in core files | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 | Completed | Decide whether to keep `validate.sh` as a thin wrapper or converge on a single cross-platform validator |
 | 2 | 2026-08-18 | Sectioned validation output and lightweight semantic checks will make the validator more useful without turning it into a heavy governance tool | Refactored `validate.ps1` to report checks by section, added semantic linkage checks between the example assessment and ADR, and cleaned remaining audit-doc encoding drift | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 20 checks across 5 sections | Completed | Decide whether to extend semantic checks to future example artifacts |
 | 3 | 2026-08-18 | Completing the example package before expanding validation will reduce overfitting and make later traceability checks anchor to real artifacts | Added the missing example documents for intake, inventory, risk register, quality scenarios, roadmap, decision log, technical debt map, and a package index; linked them from the executive assessment | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and `docs/example/` now contains one completed instance of each core template | Completed | Move to Phase 3 and add a formal traceability matrix plus evidence register |
+| 4 | 2026-08-18 | Explicit memory artifacts will let contributors trace recommendations without relying on tacit context | Added templates and example instances for a traceability matrix, evidence register, and glossary with identifier conventions; updated roadmap, decision log, debt map, and assessment links to use explicit IDs | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18; new `Memory` artifacts were added to `templates/` and `docs/example/` with no placeholders or encoding drift | Completed | Extend the validator to verify the new memory artifacts once their structure is considered stable |
+| 5 | 2026-08-18 | Once memory artifacts stabilize, detection should verify their structure and cross-artifact link integrity directly | Extended `validate.ps1` to cover the new templates and example documents, and added ID-linkage checks across traceability matrix, evidence register, roadmap, decision log, debt map, and glossary conventions | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 44 checks across 6 sections | Completed | Move to Phase 4 or decide whether to separate staged changes by phase before continuing |

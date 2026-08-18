@@ -1,11 +1,11 @@
 # Incremental modernization roadmap
 
-| Horizon | Outcome | Change | Entry evidence | Exit measure | Rollback | Dependencies |
-|---|---|---|---|---|---|---|
-| Stabilize | | | | | | |
-| Isolate | | | | | | |
-| Extract | | | | | | |
-| Optimize | | | | | | |
+| ID | Horizon | Outcome | Change | Entry evidence | Exit measure | Rollback | Dependencies |
+|---|---|---|---|---|---|---|---|
+| RM-01 | Stabilize | | | | | | |
+| RM-02 | Isolate | | | | | | |
+| RM-03 | Extract | | | | | | |
+| RM-04 | Optimize | | | | | | |
 
 ## Sequencing rules
 - Resolve observability gaps before structural migration.

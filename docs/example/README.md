@@ -15,6 +15,8 @@ A complete assessment package includes:
 7. At least one ADR linked to the recommendation.
 8. A decision log that records status and review triggers.
 9. A technical debt map linked to business impact and risks.
+10. A traceability matrix that ties recommendations back to drivers and evidence.
+11. An evidence register and glossary that make trace links auditable and consistent.
 
 ## Package index
 
@@ -26,6 +28,9 @@ A complete assessment package includes:
 - [06-modernization-roadmap.md](G:\raul\dev\architecture-assessment-kit\docs\example\06-modernization-roadmap.md:1)
 - [07-decision-log.md](G:\raul\dev\architecture-assessment-kit\docs\example\07-decision-log.md:1)
 - [08-technical-debt-map.md](G:\raul\dev\architecture-assessment-kit\docs\example\08-technical-debt-map.md:1)
+- [09-traceability-matrix.md](G:\raul\dev\architecture-assessment-kit\docs\example\09-traceability-matrix.md:1)
+- [10-evidence-register.md](G:\raul\dev\architecture-assessment-kit\docs\example\10-evidence-register.md:1)
+- [11-glossary-and-conventions.md](G:\raul\dev\architecture-assessment-kit\docs\example\11-glossary-and-conventions.md:1)
 - [adr/ADR-001-incremental-modernization.md](G:\raul\dev\architecture-assessment-kit\docs\example\adr\ADR-001-incremental-modernization.md:1)
 
 ## Reading order
@@ -34,4 +39,5 @@ A complete assessment package includes:
 2. Read [02-system-inventory.md](G:\raul\dev\architecture-assessment-kit\docs\example\02-system-inventory.md:1) and [03-risk-register.md](G:\raul\dev\architecture-assessment-kit\docs\example\03-risk-register.md:1) for the operating picture.
 3. Read [04-quality-attribute-scenarios.md](G:\raul\dev\architecture-assessment-kit\docs\example\04-quality-attribute-scenarios.md:1) and [06-modernization-roadmap.md](G:\raul\dev\architecture-assessment-kit\docs\example\06-modernization-roadmap.md:1) for the proposed change path.
 4. Read [assessment.md](G:\raul\dev\architecture-assessment-kit\docs\example\assessment.md:1) for the executive synthesis.
-5. Read [07-decision-log.md](G:\raul\dev\architecture-assessment-kit\docs\example\07-decision-log.md:1), [08-technical-debt-map.md](G:\raul\dev\architecture-assessment-kit\docs\example\08-technical-debt-map.md:1), and the [ADR](G:\raul\dev\architecture-assessment-kit\docs\example\adr\ADR-001-incremental-modernization.md:1) for traceable follow-through.
+5. Read [07-decision-log.md](G:\raul\dev\architecture-assessment-kit\docs\example\07-decision-log.md:1), [08-technical-debt-map.md](G:\raul\dev\architecture-assessment-kit\docs\example\08-technical-debt-map.md:1), [09-traceability-matrix.md](G:\raul\dev\architecture-assessment-kit\docs\example\09-traceability-matrix.md:1), and [10-evidence-register.md](G:\raul\dev\architecture-assessment-kit\docs\example\10-evidence-register.md:1) for traceable follow-through.
+6. Use [11-glossary-and-conventions.md](G:\raul\dev\architecture-assessment-kit\docs\example\11-glossary-and-conventions.md:1) as the reference for IDs and unknown handling.

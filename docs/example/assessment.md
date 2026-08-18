@@ -10,6 +10,9 @@
 - [Modernization roadmap](06-modernization-roadmap.md)
 - [Decision log](07-decision-log.md)
 - [Technical debt map](08-technical-debt-map.md)
+- [Traceability matrix](09-traceability-matrix.md)
+- [Evidence register](10-evidence-register.md)
+- [Glossary and conventions](11-glossary-and-conventions.md)
 - [ADR-001](adr/ADR-001-incremental-modernization.md)
 
 ## Executive finding
@@ -23,6 +26,8 @@ OrderFlow can be modernized incrementally. The main constraint is not framework 
 - No correlation identifier connects request, SQL changes, and carrier attempts.
 - Release rollback requires a database restore.
 - Characterization coverage exists for only 18% of critical order paths.
+
+Traceable evidence items live in [10-evidence-register.md](10-evidence-register.md).
 
 ## Risks
 
@@ -66,8 +71,8 @@ flowchart TD
 - Shadow traffic, compare outcomes, then migrate cohorts.
 - Retain reversible routing until SLOs hold for two release cycles.
 
-The sequenced version of this plan lives in [06-modernization-roadmap.md](06-modernization-roadmap.md).
+The sequenced version of this plan lives in [06-modernization-roadmap.md](06-modernization-roadmap.md), and cross-artifact trace links are summarized in [09-traceability-matrix.md](09-traceability-matrix.md).
 
 ## Decision
 
-Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), and linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md). Do not approve a full rewrite from current evidence.
+Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md), and identifier rules live in [11-glossary-and-conventions.md](11-glossary-and-conventions.md). Do not approve a full rewrite from current evidence.
