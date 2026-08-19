@@ -17,6 +17,8 @@ A complete assessment package includes:
 9. A technical debt map linked to business impact and risks.
 10. A traceability matrix that ties recommendations back to drivers and evidence.
 11. An evidence register and glossary that make trace links auditable and consistent.
+12. An assessment playbook that defines execution gates and stop rules.
+13. A post-decision review that defines how decisions re-open when triggers fire.
 
 ## Package index
 
@@ -31,6 +33,8 @@ A complete assessment package includes:
 - [09-traceability-matrix.md](G:\raul\dev\architecture-assessment-kit\docs\example\09-traceability-matrix.md:1)
 - [10-evidence-register.md](G:\raul\dev\architecture-assessment-kit\docs\example\10-evidence-register.md:1)
 - [11-glossary-and-conventions.md](G:\raul\dev\architecture-assessment-kit\docs\example\11-glossary-and-conventions.md:1)
+- [12-assessment-playbook.md](G:\raul\dev\architecture-assessment-kit\docs\example\12-assessment-playbook.md:1)
+- [13-post-decision-review.md](G:\raul\dev\architecture-assessment-kit\docs\example\13-post-decision-review.md:1)
 - [adr/ADR-001-incremental-modernization.md](G:\raul\dev\architecture-assessment-kit\docs\example\adr\ADR-001-incremental-modernization.md:1)
 
 ## Reading order
@@ -40,4 +44,5 @@ A complete assessment package includes:
 3. Read [04-quality-attribute-scenarios.md](G:\raul\dev\architecture-assessment-kit\docs\example\04-quality-attribute-scenarios.md:1) and [06-modernization-roadmap.md](G:\raul\dev\architecture-assessment-kit\docs\example\06-modernization-roadmap.md:1) for the proposed change path.
 4. Read [assessment.md](G:\raul\dev\architecture-assessment-kit\docs\example\assessment.md:1) for the executive synthesis.
 5. Read [07-decision-log.md](G:\raul\dev\architecture-assessment-kit\docs\example\07-decision-log.md:1), [08-technical-debt-map.md](G:\raul\dev\architecture-assessment-kit\docs\example\08-technical-debt-map.md:1), [09-traceability-matrix.md](G:\raul\dev\architecture-assessment-kit\docs\example\09-traceability-matrix.md:1), and [10-evidence-register.md](G:\raul\dev\architecture-assessment-kit\docs\example\10-evidence-register.md:1) for traceable follow-through.
-6. Use [11-glossary-and-conventions.md](G:\raul\dev\architecture-assessment-kit\docs\example\11-glossary-and-conventions.md:1) as the reference for IDs and unknown handling.
+6. Read [12-assessment-playbook.md](G:\raul\dev\architecture-assessment-kit\docs\example\12-assessment-playbook.md:1) and [13-post-decision-review.md](G:\raul\dev\architecture-assessment-kit\docs\example\13-post-decision-review.md:1) for workflow gates and review loop.
+7. Use [11-glossary-and-conventions.md](G:\raul\dev\architecture-assessment-kit\docs\example\11-glossary-and-conventions.md:1) as the reference for IDs and unknown handling.

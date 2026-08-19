@@ -164,6 +164,8 @@ $requiredFiles = @(
   "templates/09-traceability-matrix.md",
   "templates/10-evidence-register.md",
   "templates/11-glossary-and-conventions.md",
+  "templates/12-assessment-playbook.md",
+  "templates/13-post-decision-review.md",
   "docs/example/README.md",
   "docs/example/assessment.md",
   "docs/example/06-modernization-roadmap.md",
@@ -172,6 +174,8 @@ $requiredFiles = @(
   "docs/example/09-traceability-matrix.md",
   "docs/example/10-evidence-register.md",
   "docs/example/11-glossary-and-conventions.md",
+  "docs/example/12-assessment-playbook.md",
+  "docs/example/13-post-decision-review.md",
   "docs/example/adr/ADR-001-incremental-modernization.md"
 )
 
@@ -245,6 +249,23 @@ $requiredContent = @{
     "## Unknown handling",
     "## Glossary"
   )
+  "templates/12-assessment-playbook.md" = @(
+    "# Assessment playbook",
+    "## Purpose",
+    "## Roles",
+    "## Phases",
+    "## Minimum evidence threshold",
+    "## Review triggers",
+    "## Assessment stop rule"
+  )
+  "templates/13-post-decision-review.md" = @(
+    "# Post-decision review",
+    "## Decision summary",
+    "## Expected trigger",
+    "## Observed outcome",
+    "## Decision disposition",
+    "## Follow-up actions"
+  )
   "docs/example/README.md" = @(
     "# OrderFlow example package",
     "## Complete package definition",
@@ -284,6 +305,21 @@ $requiredContent = @{
     "E-",
     "RM-",
     "TD-"
+  )
+  "docs/example/12-assessment-playbook.md" = @(
+    "# Assessment playbook",
+    "## Minimum evidence threshold",
+    "## Review triggers",
+    "DEC-001",
+    "RM-02",
+    "RM-03"
+  )
+  "docs/example/13-post-decision-review.md" = @(
+    "# Post-decision review",
+    "Decision ID: DEC-001",
+    "ADR-001",
+    "RM-02",
+    "## Follow-up actions"
   )
   "docs/example/assessment.md" = @(
     "# OrderFlow assessment",
@@ -333,8 +369,10 @@ Add-CheckResult -Section "Content hygiene" -Check "Encoding drift" -Details "No 
 Assert-RelativeMarkdownLinksExist -Path "README.md"
 Assert-RelativeMarkdownLinksExist -Path "docs/example/README.md"
 Assert-RelativeMarkdownLinksExist -Path "docs/example/assessment.md"
+Assert-RelativeMarkdownLinksExist -Path "docs/example/12-assessment-playbook.md"
+Assert-RelativeMarkdownLinksExist -Path "docs/example/13-post-decision-review.md"
 Assert-RelativeMarkdownLinksExist -Path "docs/audit/master-mitigation-checklist.md"
-Add-CheckResult -Section "References" -Check "Relative links" -Details "Verified markdown relative links in README, example package docs, and audit checklist"
+Add-CheckResult -Section "References" -Check "Relative links" -Details "Verified markdown relative links in README, example package docs, trigger docs, and audit checklist"
 
 $assessmentContent = Get-FileContent -Path "docs/example/assessment.md"
 $adrContent = Get-FileContent -Path "docs/example/adr/ADR-001-incremental-modernization.md"
@@ -345,6 +383,8 @@ $glossaryContent = Get-FileContent -Path "docs/example/11-glossary-and-conventio
 $roadmapContent = Get-FileContent -Path "docs/example/06-modernization-roadmap.md"
 $decisionLogContent = Get-FileContent -Path "docs/example/07-decision-log.md"
 $debtMapContent = Get-FileContent -Path "docs/example/08-technical-debt-map.md"
+$playbookContent = Get-FileContent -Path "docs/example/12-assessment-playbook.md"
+$postDecisionReviewContent = Get-FileContent -Path "docs/example/13-post-decision-review.md"
 
 $assessmentRiskMatches = Get-Matches -Content $assessmentContent -Pattern '(?m)^\| (R\d+) \|'
 $assessmentRiskIds = @($assessmentRiskMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
@@ -508,5 +548,89 @@ Assert-Matches `
   -Pattern 'TD-' `
   -FailureMessage "The glossary does not define the TD- identifier convention."
 Add-CheckResult -Section "Memory traceability" -Check "Glossary conventions" -Details "The glossary defines the core identifier prefixes used by the example package"
+
+Assert-Matches `
+  -Content $exampleReadmeContent `
+  -Pattern '12-assessment-playbook\.md' `
+  -FailureMessage "The example package README does not include the assessment playbook."
+Assert-Matches `
+  -Content $exampleReadmeContent `
+  -Pattern '13-post-decision-review\.md' `
+  -FailureMessage "The example package README does not include the post-decision review."
+Add-CheckResult -Section "Trigger governance" -Check "Package index coverage" -Details "The example package README indexes the assessment playbook and post-decision review"
+
+Assert-Matches `
+  -Content $assessmentContent `
+  -Pattern '12-assessment-playbook\.md' `
+  -FailureMessage "The example assessment does not link to the assessment playbook."
+Assert-Matches `
+  -Content $assessmentContent `
+  -Pattern '13-post-decision-review\.md' `
+  -FailureMessage "The example assessment does not link to the post-decision review."
+Add-CheckResult -Section "Trigger governance" -Check "Assessment trigger links" -Details "The executive assessment links to the playbook and post-decision review"
+
+Assert-Matches `
+  -Content $adrContent `
+  -Pattern '## Follow-up signals' `
+  -FailureMessage "ADR-001 does not declare follow-up signals."
+Assert-Matches `
+  -Content $adrContent `
+  -Pattern 'RM-02' `
+  -FailureMessage "ADR-001 follow-up signals do not reference RM-02."
+Assert-Matches `
+  -Content $adrContent `
+  -Pattern 'RM-03' `
+  -FailureMessage "ADR-001 follow-up signals do not reference RM-03."
+Add-CheckResult -Section "Trigger governance" -Check "ADR follow-up signals" -Details "ADR-001 declares follow-up signals tied to RM-02 and RM-03"
+
+Assert-Matches `
+  -Content $playbookContent `
+  -Pattern 'At least three evidence items are high confidence' `
+  -FailureMessage "The example assessment playbook does not define a concrete minimum evidence threshold."
+Assert-Matches `
+  -Content $playbookContent `
+  -Pattern 'Stop the assessment if carrier retry semantics remain unknown past 2026-08-22' `
+  -FailureMessage "The example assessment playbook does not define a dated stop trigger."
+Add-CheckResult -Section "Trigger governance" -Check "Playbook thresholds" -Details "The example playbook defines a concrete evidence threshold and a dated stop trigger"
+
+Assert-Matches `
+  -Content $playbookContent `
+  -Pattern 'DEC-001' `
+  -FailureMessage "The example playbook does not reference DEC-001."
+Assert-Matches `
+  -Content $playbookContent `
+  -Pattern 'ADR-001' `
+  -FailureMessage "The example playbook does not reference ADR-001."
+Add-CheckResult -Section "Trigger governance" -Check "Playbook decision linkage" -Details "The example playbook links its triggers to DEC-001 and ADR-001"
+
+Assert-Matches `
+  -Content $postDecisionReviewContent `
+  -Pattern 'Decision ID:\s*DEC-001' `
+  -FailureMessage "The post-decision review does not reference DEC-001."
+Assert-Matches `
+  -Content $postDecisionReviewContent `
+  -Pattern 'ADR-001' `
+  -FailureMessage "The post-decision review does not reference ADR-001."
+Assert-Matches `
+  -Content $postDecisionReviewContent `
+  -Pattern 'RM-02' `
+  -FailureMessage "The post-decision review does not reference RM-02."
+Add-CheckResult -Section "Trigger governance" -Check "Post-decision review linkage" -Details "The post-decision review links to DEC-001, ADR-001, and RM-02"
+
+$followUpActionMatches = Get-Matches -Content $postDecisionReviewContent -Pattern '(?m)^\| [^|]+ \| [^|]+ \| \d{4}-\d{2}-\d{2} \| [^|]+ \|'
+if ($followUpActionMatches.Count -lt 3) {
+  throw "The post-decision review should contain at least three follow-up actions with due dates."
+}
+Add-CheckResult -Section "Trigger governance" -Check "Follow-up actions" -Details ("Found {0} dated follow-up actions in the post-decision review" -f $followUpActionMatches.Count)
+
+Assert-Matches `
+  -Content $decisionLogContent `
+  -Pattern 'RM-02' `
+  -FailureMessage "The decision log does not reference RM-02 in its review trigger."
+Assert-Matches `
+  -Content $decisionLogContent `
+  -Pattern 'RM-03' `
+  -FailureMessage "The decision log does not reference RM-03 in its review trigger."
+Add-CheckResult -Section "Trigger governance" -Check "Decision log review triggers" -Details "The decision log includes explicit RM-02 and RM-03 review triggers"
 
 Write-ValidationReport

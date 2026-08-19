@@ -13,6 +13,8 @@
 - [Traceability matrix](09-traceability-matrix.md)
 - [Evidence register](10-evidence-register.md)
 - [Glossary and conventions](11-glossary-and-conventions.md)
+- [Assessment playbook](12-assessment-playbook.md)
+- [Post-decision review](13-post-decision-review.md)
 - [ADR-001](adr/ADR-001-incremental-modernization.md)
 
 ## Executive finding
@@ -75,4 +77,4 @@ The sequenced version of this plan lives in [06-modernization-roadmap.md](06-mod
 
 ## Decision
 
-Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md), and identifier rules live in [11-glossary-and-conventions.md](11-glossary-and-conventions.md). Do not approve a full rewrite from current evidence.
+Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md), workflow gates live in [12-assessment-playbook.md](12-assessment-playbook.md), review loop details live in [13-post-decision-review.md](13-post-decision-review.md), and identifier rules live in [11-glossary-and-conventions.md](11-glossary-and-conventions.md). Do not approve a full rewrite from current evidence.

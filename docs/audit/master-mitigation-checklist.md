@@ -28,6 +28,7 @@
 - [x] Report validation output by named section instead of returning a single generic success line.
 - [x] Add lightweight semantic traceability checks between the example assessment and ADR.
 - [x] Extend validation to cover traceability matrix, evidence register, glossary conventions, and cross-artifact ID linkage.
+- [x] Extend validation to cover assessment playbook, post-decision review, and trigger-governance linkage.
 
 ### Acceptance criteria
 
@@ -69,16 +70,16 @@
 
 ### Assessment workflow and review loop
 
-- [ ] Add an `assessment-playbook` documenting phases, roles, inputs, outputs, and exit criteria.
-- [ ] Define the minimum evidence threshold required before issuing a modernization recommendation.
-- [ ] Add a `post-decision-review` or `implementation-review` template.
-- [ ] Define review triggers for ADR re-evaluation and roadmap checkpointing.
-- [ ] Add explicit guidance for when to stop the assessment because uncertainty remains too high.
+- [x] Add an `assessment-playbook` documenting phases, roles, inputs, outputs, and exit criteria.
+- [x] Define the minimum evidence threshold required before issuing a modernization recommendation.
+- [x] Add a `post-decision-review` or `implementation-review` template.
+- [x] Define review triggers for ADR re-evaluation and roadmap checkpointing.
+- [x] Add explicit guidance for when to stop the assessment because uncertainty remains too high.
 
 ### Acceptance criteria
 
-- [ ] Two different assessors can follow the same process with low ambiguity.
-- [ ] Material decisions include review triggers and measurable follow-up signals.
+- [x] Two different assessors can follow the same process with low ambiguity.
+- [x] Material decisions include review triggers and measurable follow-up signals.
 
 ## Phase 5: Input
 
@@ -123,3 +124,5 @@
 | 3 | 2026-08-18 | Completing the example package before expanding validation will reduce overfitting and make later traceability checks anchor to real artifacts | Added the missing example documents for intake, inventory, risk register, quality scenarios, roadmap, decision log, technical debt map, and a package index; linked them from the executive assessment | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and `docs/example/` now contains one completed instance of each core template | Completed | Move to Phase 3 and add a formal traceability matrix plus evidence register |
 | 4 | 2026-08-18 | Explicit memory artifacts will let contributors trace recommendations without relying on tacit context | Added templates and example instances for a traceability matrix, evidence register, and glossary with identifier conventions; updated roadmap, decision log, debt map, and assessment links to use explicit IDs | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18; new `Memory` artifacts were added to `templates/` and `docs/example/` with no placeholders or encoding drift | Completed | Extend the validator to verify the new memory artifacts once their structure is considered stable |
 | 5 | 2026-08-18 | Once memory artifacts stabilize, detection should verify their structure and cross-artifact link integrity directly | Extended `validate.ps1` to cover the new templates and example documents, and added ID-linkage checks across traceability matrix, evidence register, roadmap, decision log, debt map, and glossary conventions | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 44 checks across 6 sections | Completed | Move to Phase 4 or decide whether to separate staged changes by phase before continuing |
+| 6 | 2026-08-18 | Explicit workflow gates and review triggers will make the assessment method operational instead of purely documentary | Added templates and example instances for an assessment playbook and post-decision review, and connected them to the example package, ADR, and decision flow | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18; new trigger artifacts were added to `templates/` and `docs/example/` with no placeholders or encoding drift | Completed | Extend detection to cover the trigger artifacts once their structure is considered stable |
+| 7 | 2026-08-18 | Once trigger artifacts stabilize, detection should verify their structure and cross-artifact governance links directly | Extended `validate.ps1` to cover the new trigger templates and example documents, and added checks for playbook thresholds, ADR follow-up signals, decision-log review triggers, and post-decision review linkage | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 56 checks across 7 sections | Completed | Move to Phase 5 or decide whether to separate staged changes by phase before continuing |

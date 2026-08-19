@@ -41,7 +41,7 @@ pwsh ./validate.ps1
 `validate.sh` is the unified entry point on Unix-like environments and forwards to `pwsh`.
 Use `pwsh ./validate.ps1` on Windows or anywhere you want to invoke the validator directly.
 
-The validator reports checks by section instead of returning a single generic success line. Current sections cover structure, required document markers, content hygiene, references, semantic traceability, and memory-traceability checks across the example package.
+The validator reports checks by section instead of returning a single generic success line. Current sections cover structure, required document markers, content hygiene, references, semantic traceability, memory traceability, and trigger-governance checks across the example package.
 
 No client code, names, schemas, or proprietary rules are included.
 
