@@ -1,7 +1,7 @@
 node_modules/
 dist/
 assets/
-doc/audit/
+docs/audit/
 
 .env
 .env.*
