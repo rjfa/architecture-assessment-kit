@@ -15,6 +15,12 @@
 - [Glossary and conventions](11-glossary-and-conventions.md)
 - [Assessment playbook](12-assessment-playbook.md)
 - [Post-decision review](13-post-decision-review.md)
+- [Stakeholder interview notes](14-stakeholder-interview-notes.md)
+- [Current-state architecture](15-current-state-architecture.md)
+- [Target-state architecture](16-target-state-architecture.md)
+- [NFR baseline](17-nfr-baseline.md)
+- [Measurement plan](18-measurement-plan.md)
+- [Migration assumptions](19-migration-assumptions.md)
 - [ADR-001](adr/ADR-001-incremental-modernization.md)
 
 ## Executive finding
@@ -30,6 +36,7 @@ OrderFlow can be modernized incrementally. The main constraint is not framework 
 - Characterization coverage exists for only 18% of critical order paths.
 
 Traceable evidence items live in [10-evidence-register.md](10-evidence-register.md).
+Discovery inputs and architectural framing live in [14-stakeholder-interview-notes.md](14-stakeholder-interview-notes.md), [15-current-state-architecture.md](15-current-state-architecture.md), and [16-target-state-architecture.md](16-target-state-architecture.md).
 
 ## Risks
 
@@ -48,6 +55,7 @@ Detailed risk scoring and ownership live in [03-risk-register.md](03-risk-regist
 3. Routing can return from the extracted module to legacy in under five minutes without data loss.
 
 Detailed scenarios and measures live in [04-quality-attribute-scenarios.md](04-quality-attribute-scenarios.md).
+Baseline NFRs and measurement targets live in [17-nfr-baseline.md](17-nfr-baseline.md) and [18-measurement-plan.md](18-measurement-plan.md).
 
 ## Recommendation
 
@@ -77,4 +85,4 @@ The sequenced version of this plan lives in [06-modernization-roadmap.md](06-mod
 
 ## Decision
 
-Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md), workflow gates live in [12-assessment-playbook.md](12-assessment-playbook.md), review loop details live in [13-post-decision-review.md](13-post-decision-review.md), and identifier rules live in [11-glossary-and-conventions.md](11-glossary-and-conventions.md). Do not approve a full rewrite from current evidence.
+Proceed incrementally under [ADR-001](adr/ADR-001-incremental-modernization.md). The accepted decision is recorded in [07-decision-log.md](07-decision-log.md), linked debt items live in [08-technical-debt-map.md](08-technical-debt-map.md), workflow gates live in [12-assessment-playbook.md](12-assessment-playbook.md), review loop details live in [13-post-decision-review.md](13-post-decision-review.md), input baselines live in [17-nfr-baseline.md](17-nfr-baseline.md), [18-measurement-plan.md](18-measurement-plan.md), and [19-migration-assumptions.md](19-migration-assumptions.md), and identifier rules live in [11-glossary-and-conventions.md](11-glossary-and-conventions.md). Do not approve a full rewrite from current evidence.

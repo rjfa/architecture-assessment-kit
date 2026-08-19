@@ -29,6 +29,7 @@
 - [x] Add lightweight semantic traceability checks between the example assessment and ADR.
 - [x] Extend validation to cover traceability matrix, evidence register, glossary conventions, and cross-artifact ID linkage.
 - [x] Extend validation to cover assessment playbook, post-decision review, and trigger-governance linkage.
+- [x] Extend validation to cover stakeholder input, current/target state, NFR baseline, measurement plan, and migration assumptions.
 
 ### Acceptance criteria
 
@@ -85,17 +86,17 @@
 
 ### New input artifacts
 
-- [ ] Add a stakeholder interview or discovery-notes template.
-- [ ] Add a current-state architecture template.
-- [ ] Add a target-state architecture template.
-- [ ] Add an NFR baseline template.
-- [ ] Add a measurement-plan template tied to modernization outcomes.
-- [ ] Consider adding a migration assumptions template if roadmap decisions depend on unstated operating constraints.
+- [x] Add a stakeholder interview or discovery-notes template.
+- [x] Add a current-state architecture template.
+- [x] Add a target-state architecture template.
+- [x] Add an NFR baseline template.
+- [x] Add a measurement-plan template tied to modernization outcomes.
+- [x] Consider adding a migration assumptions template if roadmap decisions depend on unstated operating constraints.
 
 ### Acceptance criteria
 
-- [ ] Early discovery inputs can be captured without improvising ad hoc documents.
-- [ ] Target-state recommendations are explicitly tied to measurable architecture outcomes.
+- [x] Early discovery inputs can be captured without improvising ad hoc documents.
+- [x] Target-state recommendations are explicitly tied to measurable architecture outcomes.
 
 ## Existing pieces to preserve
 
@@ -126,3 +127,5 @@
 | 5 | 2026-08-18 | Once memory artifacts stabilize, detection should verify their structure and cross-artifact link integrity directly | Extended `validate.ps1` to cover the new templates and example documents, and added ID-linkage checks across traceability matrix, evidence register, roadmap, decision log, debt map, and glossary conventions | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 44 checks across 6 sections | Completed | Move to Phase 4 or decide whether to separate staged changes by phase before continuing |
 | 6 | 2026-08-18 | Explicit workflow gates and review triggers will make the assessment method operational instead of purely documentary | Added templates and example instances for an assessment playbook and post-decision review, and connected them to the example package, ADR, and decision flow | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18; new trigger artifacts were added to `templates/` and `docs/example/` with no placeholders or encoding drift | Completed | Extend detection to cover the trigger artifacts once their structure is considered stable |
 | 7 | 2026-08-18 | Once trigger artifacts stabilize, detection should verify their structure and cross-artifact governance links directly | Extended `validate.ps1` to cover the new trigger templates and example documents, and added checks for playbook thresholds, ADR follow-up signals, decision-log review triggers, and post-decision review linkage | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18 and reported 56 checks across 7 sections | Completed | Move to Phase 5 or decide whether to separate staged changes by phase before continuing |
+| 8 | 2026-08-18 | Input artifacts will reduce improvisation at assessment start and make target-state recommendations measurable from the outset | Added templates and example instances for stakeholder interview notes, current-state architecture, target-state architecture, NFR baseline, measurement plan, and migration assumptions; linked them into the example package | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-18; new input artifacts were added to `templates/` and `docs/example/` with no placeholders or encoding drift | Completed | Extend detection to cover the input artifacts once their structure is considered stable |
+| 9 | 2026-08-19 | Once input artifacts stabilize, detection should verify their structure and cross-artifact readiness links directly | Extended `validate.ps1` to cover the new input templates and example documents, and added checks for stakeholder trace links, architecture-view linkage, NFR evidence linkage, measurement linkage, and migration-assumption deadlines | `powershell -ExecutionPolicy Bypass -File .\\validate.ps1` passed on 2026-08-19 and reported 81 checks across 8 sections | Completed | Decide whether to stop at full-kit coverage or add optional stricter validation on line-level link targets |
